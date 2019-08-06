@@ -1,0 +1,203 @@
+<template>
+  <div class="head-container">
+    <div>
+      <el-select v-model="query.lineName" clearable placeholder="产线" class="filter-item" style="width: 90px"
+                 @change="toQuery">
+        <el-option v-for="item in lineNameOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+      </el-select>
+      <el-select v-model="query.cabinetNo" clearable placeholder="柜号" class="filter-item" style="width: 90px"
+                 @change="toQuery">
+        <el-option v-for="item in cabinetOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+      </el-select>
+      <el-select v-model="query.cellNo" clearable placeholder="库位" class="filter-item" style="width: 90px"
+                 @change="toQuery">
+        <el-option v-for="item in cellOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+      </el-select>
+      <el-select v-model="query.channel" clearable placeholder="通道" class="filter-item" style="width: 90px"
+                 @change="toQuery">
+        <el-option v-for="item in channelOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+      </el-select>
+      <el-date-picker
+        v-model="query.recordDate"
+        type="datetimerange"
+        size="mini"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :default-time="['12:00:00']">
+      </el-date-picker>
+      <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="toQuery">搜索</el-button>
+      <!-- 导出 -->
+      <el-popover
+        v-if="checkPermission(['ADMIN'])"
+        ref="exportExcel"
+        placement="top"
+        width="300">
+        <p>请输入文件名：</p>
+        <el-input size="mini" v-model="fileName"></el-input>
+        <div style="text-align: right; margin: 10px">
+          <el-button size="mini" type="text" @click="$refs['exportExcel'].doClose()">取消</el-button>
+          <el-button type="primary" size="mini" @click="download">确定
+          </el-button>
+        </div>
+        <el-button :loading="downloadLoading" slot="reference" type="primary" size="mini" icon="el-icon-download"
+                   class="filter-item">导出
+        </el-button>
+      </el-popover>
+      <!--      <el-button-->
+      <!--        v-if="checkPermission(['ADMIN'])"-->
+      <!--        :loading="downloadLoading"-->
+      <!--        size="mini"-->
+      <!--        class="filter-item"-->
+      <!--        type="primary"-->
+      <!--        icon="el-icon-download"-->
+      <!--        @click="download">导出-->
+      <!--      </el-button>-->
+    </div>
+    <div>
+      <el-checkbox-button :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
+      </el-checkbox-button>
+      <div style="margin: 15px 0;"></div>
+      <el-checkbox-group size="small" v-model="checkedCities" @change="handleCheckedCitiesChange">
+        <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+      </el-checkbox-group>
+    </div>
+  </div>
+</template>
+<script>
+  import checkPermission from '@/utils/permission' // 权限判断函数
+  import {parseTime} from '@/utils/index'
+
+  const cityOptions = ['线号', '柜号', '库位', '通道', '工步名称',
+    '工步号', '循环号', '功率线电压', '电压', '电流', '容量', '能量', '恒流比', '电池温度', '当前时间'];
+  export default {
+    props: {
+      query: {
+        type: Object,
+        required: true
+      },
+    },
+    data() {
+      return {
+        downloadLoading: false,
+        fileName: '',
+        // recordDate:'',
+        lineNameOptions: [
+          {key: 'Line1', display_name: '产线1'},
+          {key: 'Line2', display_name: '产线2'},
+          {key: 'Line3', display_name: '产线3'},
+          {key: 'Line4', display_name: '产线4'},
+        ],
+        cabinetOptions: [
+          {key: '1', display_name: '柜1'},
+          {key: '2', display_name: '柜2'},
+          {key: '3', display_name: '柜3'},
+          {key: '4', display_name: '柜4'},
+          {key: '5', display_name: '柜5'}
+        ],
+        cellOptions: [
+          {key: '1', display_name: '库1'},
+          {key: '2', display_name: '库2'},
+          {key: '3', display_name: '库3'},
+          {key: '4', display_name: '库4'},
+          {key: '5', display_name: '库5'}
+        ],
+        channelOptions: [
+          {key: '1', display_name: '通道1'},
+          {key: '2', display_name: '通道2'},
+          {key: '3', display_name: '通道3'},
+          {key: '4', display_name: '通道4'},
+          {key: '5', display_name: '通道5'}
+        ],
+
+        checkAll: false,
+        checkedCities: [],
+        cities: cityOptions,
+        isIndeterminate: true
+      }
+    },
+    methods: {
+      checkPermission,
+      toQuery() {
+        this.$parent.page = 0
+        this.$parent.init()
+      },
+      // 导出
+      download() {
+        this.$refs['exportExcel'].doClose();
+        this.downloadLoading = true
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['线号', '柜号', '库位', '通道', '工步名称',
+            '工步号', '循环号', '功率线电压', '电压', '电流', '容量', '能量', '恒流比', '电池温度', '当前时间'];
+          const filterVal = ['lineName', 'cabinetNo', 'cellNo', 'channel', 'stepName',
+            'stepNo', 'loopNo', 'powerLineVoltage', 'voltage', 'batteryCurrent', 'batteryCapacity',
+            'batteryEnergy', 'ccRatio', 'batteryTemperature', 'recordTime']
+          const data = this.formatJson(filterVal, this.$parent.data)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            // filename: '化成截止数据'+parseTime(new Date())
+            filename: this.fileName
+          })
+          this.downloadLoading = false
+        })
+      },
+      //数据转换
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          // if(j==='recordTime'){
+          //   return parseTime(v[j])
+          // }else{
+          //   return v[j]
+          // }
+          return v[j]
+        }))
+      },
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
+        this.isIndeterminate = false;
+        this.$parent.show_bat = val,
+          this.$parent.show_lin = val,
+          this.$parent.show_cap = val,
+          this.$parent.show_cur = val,
+          this.$parent.show_pow = val,
+          this.$parent.show_bno = val,
+          this.$parent.show_tem = val,
+          this.$parent.show_gui = val,
+          this.$parent.show_rat = val,
+          this.$parent.show_cel = val,
+          this.$parent.show_cha = val,
+          this.$parent.show_loo = val,
+          this.$parent.show_plv = val,
+          this.$parent.show_now = val,
+          this.$parent.show_stn = val,
+          this.$parent.show_sno = val,
+          this.$parent.show_tra = val,
+          this.$parent.show_vol = val
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+        this.$parent.show_bat = value.indexOf('批次号') > -1;
+        this.$parent.show_lin = value.indexOf('线号') > -1;
+        this.$parent.show_cap = value.indexOf('容量') > -1;
+        this.$parent.show_cur = value.indexOf('电流') > -1;
+        this.$parent.show_cap = value.indexOf('容量') > -1;
+        this.$parent.show_pow = value.indexOf('能量') > -1;
+        this.$parent.show_bno = value.indexOf('电池编号') > -1;
+        this.$parent.show_tem = value.indexOf('电池温度') > -1;
+        this.$parent.show_gui = value.indexOf('柜号') > -1;
+        this.$parent.show_rat = value.indexOf('恒流比') > -1;
+        this.$parent.show_cel = value.indexOf('库位') > -1;
+        this.$parent.show_cha = value.indexOf('通道') > -1;
+        this.$parent.show_loo = value.indexOf('循环号') > -1;
+        this.$parent.show_plv = value.indexOf('功率线电压') > -1;
+        this.$parent.show_now = value.indexOf('当前时间') > -1;
+        this.$parent.show_stn = value.indexOf('工步名称') > -1;
+        this.$parent.show_sno = value.indexOf('工步号') > -1;
+        this.$parent.show_tra = value.indexOf('托盘号') > -1;
+        this.$parent.show_vol = value.indexOf('电压') > -1;
+      },
+    }
+  }
+</script>
