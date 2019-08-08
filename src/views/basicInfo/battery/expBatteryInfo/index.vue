@@ -3,19 +3,19 @@
     <eHeader :query="query"/>
     <!--表格渲染-->
     <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
-      <el-table-column prop="name" label="配方名称"/>
-      <el-table-column prop="creatorName" label="创建人"/>
-      <el-table-column prop="createTime" label="创建时间">
+      <el-table-column prop="number" label="型号"/>
+      <el-table-column prop="typeName" label="类型"/>
+      <el-table-column prop="lineNames" label="产线">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime) }}</span>
+          <span v-for="item in scope.row.lineNames">
+            <el-tag>{{item}}</el-tag>
+          </span>
         </template>
       </el-table-column>
-      <el-table-column prop="updaterName" label="最近更新人"/>
-      <el-table-column prop="createTime" label="更新时间">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.updateTime) }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column prop="formationRecipeName" label="化成工艺"/>
+      <el-table-column prop="divisionRecipeName" label="分容工艺"/>
+      <el-table-column prop="chargeRecipeName" label="调荷工艺"/>
+      <el-table-column prop="protectParamName" label="保护参数"/>
       <el-table-column label="操作" width="150px" align="center">
         <template slot-scope="scope">
           <edit v-if="checkPermission(['ADMIN'])" :data="scope.row" :sup_this="sup_this"/>
@@ -47,8 +47,8 @@
 <script>
 import checkPermission from '@/utils/permission'
 import initData from '@/mixins/initData'
+import { del } from '@/api/expBatteryInfo'
 import { parseTime } from '@/utils/index'
-import { del } from '@/api/dcrRecipe'
 import eHeader from './module/header'
 import edit from './module/edit'
 export default {
@@ -68,7 +68,7 @@ export default {
     parseTime,
     checkPermission,
     beforeInit() {
-      this.url = 'api/dcrRecipe'
+      this.url = 'api/expBatteryInfo'
       const sort = 'id,desc'
       this.params = { page: this.page, size: this.size, sort: sort }
       const query = this.query

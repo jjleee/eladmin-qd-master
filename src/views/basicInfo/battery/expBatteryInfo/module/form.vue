@@ -57,33 +57,16 @@
 
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-form-item label="OCV工艺" prop="ocvRecipeName">
-            <el-select v-model="form.ocvRecipeName" clearable placeholder="请选择">
-              <el-option v-for="item in ocvOptions" :key="item" :value="item"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
           <el-form-item label="DCR工艺" prop="dcrRecipeName">
             <el-select v-model="form.dcrRecipeName" clearable placeholder="请选择">
               <el-option v-for="item in dcrOptions" :key="item" :value="item"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
-      </el-row>
-
-      <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="保护参数" prop="protectParamName">
             <el-select v-model="form.protectParamName" clearable placeholder="请选择">
               <el-option v-for="item in protectOptions" :key="item" :value="item"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="分档规则" prop="binningRuleName">
-            <el-select v-model="form.binningRuleName" clearable placeholder="请选择">
-              <el-option v-for="item in binningOptions" :key="item" :value="item"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -112,16 +95,14 @@
 </template>
 
 <script>
-  import {add, edit} from "@/api/batteryInfo";
+  import {add, edit} from "@/api/expBatteryInfo";
   import {getTypeNames} from "@/api/batteryType";
   import {getLineNames} from "@/api/lineInfo";
   import {getFormationNames} from "@/api/formationRecipe";
   import {getDivisionNames} from "@/api/divisionRecipe";
   import {getDischargeNames} from "@/api/dischargeRecipe";
   import {getProtectNames} from "@/api/globalProtectParam";
-  import {getOcvNames} from "@/api/ocvRecipe";
   import {getDcrNames} from "@/api/dcrRecipe";
-  import {getBinningNames} from "@/api/binningRule";
   import {getNgNames} from "@/api/ngRule";
 
   export default {
@@ -146,11 +127,9 @@
           lineNames: [],
           formationRecipeName: "",
           divisionRecipeName: "",
-          ocvRecipeName: "",
           dcrRecipeName: "",
           chargeRecipeName: "",
           protectParamName: "",
-          binningRuleName: "",
           ngRuleName: "",
           creatorName: "",
           createTime: "",
@@ -160,11 +139,9 @@
         lineOptions: [],
         formationOptions: [],
         divisionOptions: [],
-        ocvOptions: [],
         dcrOptions: [],
         chargeOptions: [],
         protectOptions: [],
-        binningOptions: [],
         ngOptions: [],
         dcrCalOptions: []
       };
@@ -226,11 +203,9 @@
           lineNames: '',
           formationRecipeName: '',
           divisionRecipeName: '',
-          ocvRecipeName: '',
           dcrRecipeName: '',
           chargeRecipeName: '',
           protectParamName: '',
-          binningRuleName: '',
           ngRuleName: '',
           creatorName: '',
           createTime: '',
@@ -242,50 +217,37 @@
           this.typeOptions = res
         }).catch(err => {
           console.error(err)
-        })
+        });
         getLineNames().then(res => {
           this.lineOptions = res
         }).catch(err => {
           console.error(err)
-        })
-        getFormationNames(1).then(res => {
+        });
+        getFormationNames(3).then(res => {
           this.formationOptions = res
         }).catch(err => {
           console.error(err)
-        })
-
-        getDivisionNames(1).then(res => {
+        });
+        getDivisionNames(3).then(res => {
           this.divisionOptions = res
         }).catch(err => {
           console.error(err)
-        })
-        getDischargeNames(1).then(res => {
+        });
+        getDischargeNames(3).then(res => {
           this.chargeOptions = res
         }).catch(err => {
           console.error(err)
-        })
-        getOcvNames(1).then(res => {
-          this.ocvOptions = res
-        }).catch(err => {
-          console.error(err)
-        })
-        getDcrNames(1).then(res => {
+        });
+        getDcrNames(3).then(res => {
           this.dcrOptions = res
         }).catch(err => {
           console.error(err)
-        })
-
+        });
         getProtectNames().then(res => {
           this.protectOptions = res
         }).catch(err => {
           console.error(err)
-        })
-
-        getBinningNames().then(res => {
-          this.binningOptions = res
-        }).catch(err => {
-          console.error(err)
-        })
+        });
         getNgNames().then(res => {
           this.ngOptions = res
         }).catch(err => {

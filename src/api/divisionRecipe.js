@@ -23,9 +23,9 @@ export function edit(data) {
   })
 }
 
-export function getDivisionNames() {
+export function getDivisionNames(type) {
   return request({
-    url: 'api/divisionRecipe/names',
+    url: 'api/divisionRecipe/names/'+type,
     method: 'get'
   })
 }

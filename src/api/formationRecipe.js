@@ -34,9 +34,9 @@ export function edit(data) {
   })
 }
 
-export function getFormationNames() {
+export function getFormationNames(type) {
   return request({
-    url: 'api/formationRecipe/names',
+    url: 'api/formationRecipe/names/'+type,
     method: 'get'
   })
 }

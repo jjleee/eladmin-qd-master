@@ -23,9 +23,9 @@ export function edit(data) {
   })
 }
 
-export function getDcrNames() {
+export function getDcrNames(type) {
   return request({
-    url: 'api/dcrRecipe/names',
+    url: 'api/dcrRecipe/names/'+type,
     method: 'get'
   })
 }

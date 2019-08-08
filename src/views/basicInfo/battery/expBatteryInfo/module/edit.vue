@@ -23,14 +23,18 @@ export default {
       const _this = this.$refs.form
       _this.form = {
         id: this.data.id,
-        name: this.data.name,
-        recipeType:this.data.recipeType,
-        version:this.data.version,
-        creatorName:this.data.creatorName,
-        updaterName:this.data.updaterName,
-        createTime:this.data.createTime,
-        updateTime:this.data.updateTime,
-        steps:this.data.steps
+        number: this.data.number,
+        typeName: this.data.typeName,
+        lineNames: this.data.lineNames,
+        formationRecipeName: this.data.formationRecipeName,
+        divisionRecipeName: this.data.divisionRecipeName,
+        dcrRecipeName: this.data.dcrRecipeName,
+        chargeRecipeName: this.data.chargeRecipeName,
+        protectParamName: this.data.protectParamName,
+        ngRuleName: this.data.ngRuleName,
+        creatorName: this.data.creatorName,
+        createTime: this.data.createTime,
+        available: this.data.available
       }
       _this.dialog = true
     }

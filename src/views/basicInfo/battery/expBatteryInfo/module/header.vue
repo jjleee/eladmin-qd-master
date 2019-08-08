@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       queryTypeOptions: [
-        { key: 'name', display_name: '配方名称' },
+        { key: 'number', display_name: '型号' },
+        { key: 'typeName', display_name: '类型' },
       ]
     }
   },
