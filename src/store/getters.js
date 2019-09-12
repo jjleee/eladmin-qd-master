@@ -15,6 +15,7 @@ const getters = {
   socketApi: state => state.api.socketApi,
   imagesUploadApi: state => state.api.imagesUploadApi,
   updateAvatarApi: state => state.api.updateAvatarApi,
-  qiNiuUploadApi: state => state.api.qiNiuUploadApi
+  qiNiuUploadApi: state => state.api.qiNiuUploadApi,
+  dataViewApi:state => state.api.dataViewApi
 }
 export default getters

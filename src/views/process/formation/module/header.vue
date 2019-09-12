@@ -9,7 +9,7 @@
     <!-- 新增 -->
     <div style="display: inline-block;margin: 0px 2px;">
       <el-button
-        v-if="checkPermission(['ADMIN'])"
+        v-if="checkPermission(['ADMIN','RECIPE_ALL','RECIPE_EDIT'])"
         class="filter-item"
         size="mini"
         type="primary"

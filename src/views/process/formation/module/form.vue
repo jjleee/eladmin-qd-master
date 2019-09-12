@@ -12,9 +12,14 @@
             <el-input :disabled="!isAdd" v-model="form.name"/>
           </el-form-item>
         </el-col>
-        <el-col :span="4">
-          <el-form-item label="编辑者" prop="editorName">
-            <el-input v-model="form.editorName"/>
+        <el-col :span="3">
+          <el-form-item v-show="!isAdd" label="创建者" prop="editorName">
+            <el-input disabled="true" v-model="form.editorName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="3">
+          <el-form-item v-show="!isAdd" label="更新者" prop="updaterName">
+            <el-input disabled="true" v-model="form.updaterName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="4">
@@ -25,7 +30,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-form-item label="采样频率" prop="frequency">
             <el-input v-model="form.frequency"
                       onkeypress="return event.keyCode>=48&&event.keyCode<=57"/>
@@ -36,7 +41,7 @@
             <el-input v-model="form.description"/>
           </el-form-item>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-form-item v-show="!isAdd" label="版本号" prop="version">
             <el-input :disabled="true" v-model="form.version"/>
           </el-form-item>
@@ -267,7 +272,7 @@
                           onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/>
               </template>
             </el-table-column>
-            <el-table-column v-if="show" prop="upperLimitCurrent" label="上限电流(mA)">
+            <el-table-column v-if="show" prop="upperLimitCurrent" label="充电电流Max(mA)">
               <template slot-scope="scope">
                 <el-input size="mini"
                           :disabled="scope.row.stroke===''||scope.row.stroke==='pump'||scope.row.stroke==='leak'"
@@ -275,7 +280,7 @@
                           onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/>
               </template>
             </el-table-column>
-            <el-table-column v-if="show" prop="lowerLimitCurrent" label="下限电流(mA)">
+            <el-table-column v-if="show" prop="lowerLimitCurrent" label="放电电流Max(mA)">
               <template slot-scope="scope">
                 <el-input size="mini"
                           :disabled="scope.row.stroke===''||scope.row.stroke==='pump'||scope.row.stroke==='leak'"
@@ -283,7 +288,7 @@
                           onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/>
               </template>
             </el-table-column>
-            <el-table-column v-if="show" prop="upperLimitCapacity" label="上限容量(mAh)">
+            <el-table-column v-if="show" prop="upperLimitCapacity" label="充电容量Max(mAh)">
               <template slot-scope="scope">
                 <el-input size="mini"
                           :disabled="scope.row.stroke===''||scope.row.stroke==='pump'||scope.row.stroke==='leak'"
@@ -291,7 +296,7 @@
                           onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/>
               </template>
             </el-table-column>
-            <el-table-column v-if="show" prop="lowerLimitCapacity" label="下限容量(mAh)">
+            <el-table-column v-if="show" prop="lowerLimitCapacity" label="放电容量Max(mAh)">
               <template slot-scope="scope">
                 <el-input size="mini"
                           :disabled="scope.row.stroke===''||scope.row.stroke==='pump'||scope.row.stroke==='leak'"
@@ -384,7 +389,6 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="cancel">取消</el-button>
-
       <el-popover
         ref="subDialog"
         placement="top"
@@ -501,7 +505,7 @@
         form: {
           id: '',
           name: '',
-          editorName: '',
+          editorName:'',
           frequency: '',
           version: '',
           description: '',
@@ -510,10 +514,6 @@
         },
         rules: {
           name: [{required: true, message: "请输入配方名", trigger: "blur"}],
-          editorName: [
-            {required: true, message: "请输入编辑者名称", trigger: "blur"},
-            {min: 3, max: 20, message: "长度在 3 到 20 个字符", trigger: "blur"}
-          ],
           recipeType: [
             {required: true, message: '请选择配方类型', trigger: "blur"}
           ],
@@ -589,7 +589,7 @@
     computed: {
       workStepInfos1: function () {
         return this.sortKey(this.form.workStepInfos, 'orderNumber')
-      }
+      },
     },
     mounted() {
       this.initOptions()
@@ -599,13 +599,16 @@
         this.resetForm()
       },
       doSubmit() {
+        alert(11)
         this.$refs["form"].validate(valid => {
           if (valid) {
+            alert(22)
             this.loading = true;
             if (this.isAdd) {
               this.doAdd();
             } else this.doEdit();
           } else {
+            alert(valid)
             return false;
           }
         });
@@ -654,6 +657,7 @@
         this.form = {
           name: '',
           editorName: '',
+          updaterName:'',
           frequency: '',
           version: '',
           description: '',

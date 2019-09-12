@@ -3,33 +3,32 @@
     <eHeader :query="query"/>
     <!--表格渲染-->
     <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
-      <el-table-column prop="name" label="名称"/>
-      <el-table-column prop="code" label="代码"/>
+      <el-table-column prop="planName" label="名称"/>
+      <el-table-column prop="batteryNumber" label="批次号"/>
       <el-table-column prop="creatorName" label="创建人"/>
       <el-table-column prop="createTime" label="创建时间">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="updaterName" label="更新人"/>
       <el-table-column prop="updateTime" label="更新时间">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updateTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="description" label="描述"/>
-      <el-table-column prop="batteryNumber" label="电池型号"/>
       <el-table-column label="操作" width="150px" align="center">
         <template slot-scope="scope">
           <edit v-if="checkPermission(['ADMIN'])" :data="scope.row" :sup_this="sup_this"/>
           <el-popover
             v-if="checkPermission(['ADMIN'])"
-            :ref="scope.row.id"
+            :ref="scope.row.planId"
             placement="top"
             width="180">
             <p>确定删除本条数据吗？</p>
             <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="$refs[scope.row.id].doClose()">取消</el-button>
-              <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.id)">确定</el-button>
+              <el-button size="mini" type="text" @click="$refs[scope.row.planId].doClose()">取消</el-button>
+              <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.planId)">确定</el-button>
             </div>
             <el-button slot="reference" type="danger" size="mini">删除</el-button>
           </el-popover>
@@ -49,7 +48,7 @@
 <script>
 import checkPermission from '@/utils/permission'
 import initData from '@/mixins/initData'
-import { del } from '@/api/binningRule'
+import { del } from '@/api/binningPlan'
 import { parseTime } from '@/utils/index'
 import eHeader from './module/header'
 import edit from './module/edit'
@@ -70,8 +69,8 @@ export default {
     parseTime,
     checkPermission,
     beforeInit() {
-      this.url = 'api/binningRule'
-      const sort = 'id,desc'
+      this.url = 'api/binningPlan'
+      const sort = 'planId,desc'
       this.params = { page: this.page, size: this.size, sort: sort }
       const query = this.query
       const type = query.type
@@ -79,11 +78,11 @@ export default {
       if (type && value) { this.params[type] = value }
       return true
     },
-    subDelete(id) {
+    subDelete(planId) {
       this.delLoading = true
-      del(id).then(res => {
+      del(planId).then(res => {
         this.delLoading = false
-        this.$refs[id].doClose()
+        this.$refs[planId].doClose()
         this.init()
         this.$notify({
           title: '删除成功',
@@ -92,7 +91,7 @@ export default {
         })
       }).catch(err => {
         this.delLoading = false
-        this.$refs[id].doClose()
+        this.$refs[planId].doClose()
         console.log(err.response.data.message)
       })
     }

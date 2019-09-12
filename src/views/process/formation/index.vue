@@ -21,9 +21,10 @@
       <el-table-column prop="description" label="描述"/>
       <el-table-column label="操作" width="200px" align="center">
         <template slot-scope="scope">
-          <edit v-if="checkPermission(['ADMIN'])" :data="scope.row" :sup_this="sup_this"/>
+          <edit v-if="checkPermission(['ADMIN','RECIPE_EDIT','RECIPE_ALL'])" :data="scope.row" :sup_this="sup_this"/>
+          <eView v-else="checkPermission(['RECIPE_SELECT'])" :data="scope.row" :sup_this="sup_this"/>
           <el-popover
-            v-if="checkPermission(['ADMIN'])"
+            v-if="checkPermission(['ADMIN','RECIPE_EDIT','RECIPE_ALL'])"
             :ref="scope.row.id"
             placement="top"
             width="240">
@@ -36,7 +37,7 @@
             <el-button slot="reference" type="warning" size="mini">复制</el-button>
           </el-popover>
           <el-popover
-            v-if="checkPermission(['ADMIN'])"
+            v-if="checkPermission(['ADMIN','RECIPE_ALL','RECIPE_DELETE'])"
             :ref="scope.row.name"
             placement="top"
             width="180">
@@ -70,9 +71,10 @@
   import {parseTime} from '@/utils/index'
   import eHeader from './module/header'
   import edit from './module/edit'
+  import eView from './module/view'
 
   export default {
-    components: {eHeader, edit},
+    components: {eHeader, edit,eView},
     mixins: [initData],
     data() {
       return {

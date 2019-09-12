@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function add(data) {
   return request({
-    url: 'api/binningRule',
+    url: 'api/binningPlan',
     method: 'post',
     data
   })
@@ -10,14 +10,14 @@ export function add(data) {
 
 export function del(id) {
   return request({
-    url: 'api/binningRule/' + id,
+    url: 'api/binningPlan/' + id,
     method: 'delete'
   })
 }
 
 export function edit(data) {
   return request({
-    url: 'api/binningRule',
+    url: 'api/binningPlan',
     method: 'put',
     data
   })
@@ -25,7 +25,13 @@ export function edit(data) {
 
 export function getBinningNames() {
   return request({
-    url: 'api/binningRule/names',
+    url: 'api/binningPlan/names',
     method: 'get'
+  })
+}
+export function getStepName(number) {
+  return request({
+    url: 'api/binningPlan/step/' + number,
+    method: 'post'
   })
 }

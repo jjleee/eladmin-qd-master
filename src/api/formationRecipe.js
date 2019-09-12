@@ -40,3 +40,5 @@ export function getFormationNames(type) {
     method: 'get'
   })
 }
+
+

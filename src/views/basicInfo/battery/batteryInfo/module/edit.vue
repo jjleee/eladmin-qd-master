@@ -32,7 +32,7 @@ export default {
         dcrRecipeName: this.data.dcrRecipeName,
         chargeRecipeName: this.data.chargeRecipeName,
         protectParamName: this.data.protectParamName,
-        binningRuleName: this.data.binningRuleName,
+        binningPlanName: this.data.binningPlanName,
         ngRuleName: this.data.ngRuleName,
         creatorName: this.data.creatorName,
         createTime: this.data.createTime,

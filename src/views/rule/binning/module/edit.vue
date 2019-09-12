@@ -22,14 +22,14 @@ export default {
     to() {
       const _this = this.$refs.form
       _this.form = {
-        id: this.data.id,
-        name: this.data.name,
-        code: this.data.code,
+        planId: this.data.planId,
+        planName: this.data.planName,
+        batteryNumber:this.data.batteryNumber,
         creatorName: this.data.creatorName,
         createTime: this.data.createTime,
+        updaterName: this.data.updaterName,
         updateTime: this.data.updateTime,
-        description: this.data.description,
-        batteryNumber: this.data.batteryNumber
+        rules: this.data.rules,
       }
       _this.dialog = true
     }

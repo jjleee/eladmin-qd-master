@@ -81,8 +81,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="分档规则" prop="binningRuleName">
-            <el-select v-model="form.binningRuleName" clearable placeholder="请选择">
+          <el-form-item label="分档规则" prop="binningPlanName">
+            <el-select v-model="form.binningPlanName" clearable placeholder="请选择">
               <el-option v-for="item in binningOptions" :key="item" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -121,7 +121,7 @@
   import {getProtectNames} from "@/api/globalProtectParam";
   import {getOcvNames} from "@/api/ocvRecipe";
   import {getDcrNames} from "@/api/dcrRecipe";
-  import {getBinningNames} from "@/api/binningRule";
+  import {getPlanNames} from "@/api/binningPlan";
   import {getNgNames} from "@/api/ngRule";
 
   export default {
@@ -150,7 +150,7 @@
           dcrRecipeName: "",
           chargeRecipeName: "",
           protectParamName: "",
-          binningRuleName: "",
+          binningPlanName: "",
           ngRuleName: "",
           creatorName: "",
           createTime: "",
@@ -230,7 +230,7 @@
           dcrRecipeName: '',
           chargeRecipeName: '',
           protectParamName: '',
-          binningRuleName: '',
+          binningPlanName: '',
           ngRuleName: '',
           creatorName: '',
           createTime: '',
@@ -281,7 +281,7 @@
           console.error(err)
         })
 
-        getBinningNames().then(res => {
+        getPlanNames().then(res => {
           this.binningOptions = res
         }).catch(err => {
           console.error(err)
