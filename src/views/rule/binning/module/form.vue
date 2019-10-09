@@ -12,7 +12,7 @@
               <el-button class="el-icon-plus" type="warning" @click.prevent="addExpress()"/>
             </p>
           </div>
-          <el-table :data="expresses" border>
+          <el-table :data="expresses" class="ruleTable" border>
             <el-table-column align="center" label="And/Or">
               <template slot-scope="scope">
                 <el-select size="mini" v-model="scope.row.and_or" clearable placeholder="请选择">

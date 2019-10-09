@@ -65,84 +65,84 @@
       return {
         downloadLoading: false,
         lineNameOptions: [
-          {key: '1', display_name: '产线1'},
-          {key: '2', display_name: '产线2'},
-          {key: '3', display_name: '产线3'},
-          {key: '4', display_name: '产线4'},
-          {key: '5', display_name: '产线5'},
-          {key: '6', display_name: '产线6'},
+          {key: 1, display_name: '产线1'},
+          {key: 2, display_name: '产线2'},
+          {key: 3, display_name: '产线3'},
+          {key: 4, display_name: '产线4'},
+          {key: 5, display_name: '产线5'},
+          {key: 6, display_name: '产线6'},
         ],
         cabinetOptions: [
-          {key: '1', display_name: '柜1'},
-          {key: '2', display_name: '柜2'},
-          {key: '3', display_name: '柜3'},
-          {key: '4', display_name: '柜4'},
-          {key: '5', display_name: '柜5'},
-          {key: '6', display_name: '柜6'},
-          {key: '7', display_name: '柜7'},
-          {key: '8', display_name: '柜8'},
-          {key: '9', display_name: '柜9'},
-          {key: '10', display_name: '柜10'}
+          {key: 1, display_name: '柜1'},
+          {key: 2, display_name: '柜2'},
+          {key: 3, display_name: '柜3'},
+          {key: 4, display_name: '柜4'},
+          {key: 5, display_name: '柜5'},
+          {key: 6, display_name: '柜6'},
+          {key: 7, display_name: '柜7'},
+          {key: 8, display_name: '柜8'},
+          {key: 9, display_name: '柜9'},
+          {key: 10, display_name: '柜10'}
         ],
         cellOptions: [
-          {key: '1', display_name: '库1'},
-          {key: '2', display_name: '库2'},
-          {key: '3', display_name: '库3'},
-          {key: '4', display_name: '库4'},
-          {key: '5', display_name: '库5'},
-          {key: '6', display_name: '库6'},
-          {key: '7', display_name: '库7'},
-          {key: '8', display_name: '库8'}
+          {key: 1, display_name: '库1'},
+          {key: 2, display_name: '库2'},
+          {key: 3, display_name: '库3'},
+          {key: 4, display_name: '库4'},
+          {key: 5, display_name: '库5'},
+          {key: 6, display_name: '库6'},
+          {key: 7, display_name: '库7'},
+          {key: 8, display_name: '库8'}
         ],
         channelOptions: [
-          {key: '1', display_name: '通道1'},
-          {key: '2', display_name: '通道2'},
-          {key: '3', display_name: '通道3'},
-          {key: '4', display_name: '通道4'},
-          {key: '5', display_name: '通道5'},
-          {key: '6', display_name: '通道6'},
-          {key: '7', display_name: '通道7'},
-          {key: '8', display_name: '通道8'},
-          {key: '9', display_name: '通道9'},
-          {key: '10', display_name: '通道10'},
-          {key: '11', display_name: '通道11'},
-          {key: '12', display_name: '通道12'},
-          {key: '13', display_name: '通道13'},
-          {key: '14', display_name: '通道14'},
-          {key: '15', display_name: '通道15'},
-          {key: '16', display_name: '通道16'},
-          {key: '17', display_name: '通道17'},
-          {key: '18', display_name: '通道18'},
-          {key: '19', display_name: '通道19'},
-          {key: '20', display_name: '通道20'},
-          {key: '21', display_name: '通道21'},
-          {key: '22', display_name: '通道22'},
-          {key: '23', display_name: '通道23'},
-          {key: '24', display_name: '通道24'},
-          {key: '25', display_name: '通道25'},
-          {key: '26', display_name: '通道26'},
-          {key: '27', display_name: '通道27'},
-          {key: '28', display_name: '通道28'},
-          {key: '29', display_name: '通道29'},
-          {key: '30', display_name: '通道30'},
-          {key: '31', display_name: '通道31'},
-          {key: '32', display_name: '通道32'},
-          {key: '33', display_name: '通道33'},
-          {key: '34', display_name: '通道34'},
-          {key: '35', display_name: '通道35'},
-          {key: '36', display_name: '通道36'},
-          {key: '37', display_name: '通道37'},
-          {key: '38', display_name: '通道38'},
-          {key: '39', display_name: '通道39'},
-          {key: '40', display_name: '通道40'},
-          {key: '41', display_name: '通道41'},
-          {key: '42', display_name: '通道42'},
-          {key: '43', display_name: '通道43'},
-          {key: '44', display_name: '通道44'},
-          {key: '45', display_name: '通道45'},
-          {key: '46', display_name: '通道46'},
-          {key: '47', display_name: '通道47'},
-          {key: '48', display_name: '通道48'}
+          {key: 1, display_name: '通道1'},
+          {key: 2, display_name: '通道2'},
+          {key: 3, display_name: '通道3'},
+          {key: 4, display_name: '通道4'},
+          {key: 5, display_name: '通道5'},
+          {key: 6, display_name: '通道6'},
+          {key: 7, display_name: '通道7'},
+          {key: 8, display_name: '通道8'},
+          {key: 9, display_name: '通道9'},
+          {key: 10, display_name: '通道10'},
+          {key: 11, display_name: '通道11'},
+          {key: 12, display_name: '通道12'},
+          {key: 13, display_name: '通道13'},
+          {key: 14, display_name: '通道14'},
+          {key: 15, display_name: '通道15'},
+          {key: 16, display_name: '通道16'},
+          {key: 17, display_name: '通道17'},
+          {key: 18, display_name: '通道18'},
+          {key: 19, display_name: '通道19'},
+          {key: 20, display_name: '通道20'},
+          {key: 21, display_name: '通道21'},
+          {key: 22, display_name: '通道22'},
+          {key: 23, display_name: '通道23'},
+          {key: 24, display_name: '通道24'},
+          {key: 25, display_name: '通道25'},
+          {key: 26, display_name: '通道26'},
+          {key: 27, display_name: '通道27'},
+          {key: 28, display_name: '通道28'},
+          {key: 29, display_name: '通道29'},
+          {key: 30, display_name: '通道30'},
+          {key: 31, display_name: '通道31'},
+          {key: 32, display_name: '通道32'},
+          {key: 33, display_name: '通道33'},
+          {key: 34, display_name: '通道34'},
+          {key: 35, display_name: '通道35'},
+          {key: 36, display_name: '通道36'},
+          {key: 37, display_name: '通道37'},
+          {key: 38, display_name: '通道38'},
+          {key: 39, display_name: '通道39'},
+          {key: 40, display_name: '通道40'},
+          {key: 41, display_name: '通道41'},
+          {key: 42, display_name: '通道42'},
+          {key: 43, display_name: '通道43'},
+          {key: 44, display_name: '通道44'},
+          {key: 45, display_name: '通道45'},
+          {key: 46, display_name: '通道46'},
+          {key: 47, display_name: '通道47'},
+          {key: 48, display_name: '通道48'}
         ],
         pickerOptions: {
           shortcuts: [{
@@ -210,26 +210,24 @@
             return parseTime(new Date(v[j] * 1000))
           } else if (j === 'stepType') {
             switch (v[j]) {
-              case '1':
+              case 1:
                 return "静置"
-              case '2':
+              case 2:
                 return "恒流充电"
-              case '3':
+              case 3:
                 return "恒压充电"
-              case '4':
+              case 4:
                 return "恒流恒压充电"
-              case '5':
+              case 5:
                 return "恒流放电"
-              case '6':
+              case 6:
                 return "恒压放电"
-              case '11':
+              case 11:
                 return "恒流恒压放电"
               default:
                 break;
             }
-          } else if (j === 'current') {
-            return Number(v[j])
-          } else {
+          }else {
             return v[j]
           }
         }))

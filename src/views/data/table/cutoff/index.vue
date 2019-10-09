@@ -41,7 +41,6 @@
       :total="total"
       style="margin-top: 8px;"
       layout="total, prev, pager, next, sizes"
-      :page-sizes="[100, 1000, 10000, 100000]"
       @size-change="sizeChange"
       @current-change="pageChange"/>
   </div>
@@ -72,7 +71,6 @@
 
     data() {
       return {
-        size: 100,
         sup_this: this,
         show_lin: false,
         show_bat: false,

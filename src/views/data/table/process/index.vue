@@ -14,13 +14,13 @@
       <el-table-column v-if="show_sno" prop="stepNo" label="工步号"/>
       <el-table-column v-if="show_stt" width="100px" prop="stepType" label="工步类型">
         <template slot-scope="scope">
-          <span v-if="scope.row.stepType==='1'">静置</span>
-          <span v-if="scope.row.stepType==='2'">恒流充电</span>
-          <span v-if="scope.row.stepType==='3'">恒压充电</span>
-          <span v-if="scope.row.stepType==='4'">恒流恒压充电</span>
-          <span v-if="scope.row.stepType==='5'">恒流放电</span>
-          <span v-if="scope.row.stepType==='6'">恒压放电</span>
-          <span v-if="scope.row.stepType==='11'">恒流恒压放电</span>
+          <span v-if="scope.row.stepType===1">静置</span>
+          <span v-if="scope.row.stepType===2">恒流充电</span>
+          <span v-if="scope.row.stepType===3">恒压充电</span>
+          <span v-if="scope.row.stepType===4">恒流恒压充电</span>
+          <span v-if="scope.row.stepType===5">恒流放电</span>
+          <span v-if="scope.row.stepType===6">恒压放电</span>
+          <span v-if="scope.row.stepType===11">恒流恒压放电</span>
         </template>
       </el-table-column>
       <el-table-column v-if="show_loo" prop="loopNo" label="循环号"/>
@@ -51,6 +51,7 @@
       :total="total"
       style="margin-top: 8px;"
       layout="total, prev, pager, next, sizes"
+      :page-sizes="[10000]"
       @size-change="sizeChange"
       @current-change="pageChange"/>
   </div>
@@ -111,7 +112,7 @@
       beforeInit() {
         this.url = 'api/processData';
         const sort = 'currentTime,desc';
-        this.params = {page: this.page, size: this.size, sort: sort};
+        this.params = {page: this.page, size: 10000, sort: sort};
         const query = this.query;
         const lineNo= query.lineNo;
         const cabNo = query.cabNo;

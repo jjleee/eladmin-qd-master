@@ -599,10 +599,8 @@
         this.resetForm()
       },
       doSubmit() {
-        alert(11)
         this.$refs["form"].validate(valid => {
           if (valid) {
-            alert(22)
             this.loading = true;
             if (this.isAdd) {
               this.doAdd();
