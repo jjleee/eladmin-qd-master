@@ -51,7 +51,7 @@
       :total="total"
       style="margin-top: 8px;"
       layout="total, prev, pager, next, sizes"
-      :page-sizes="[10000]"
+      :page-sizes="[20000]"
       @size-change="sizeChange"
       @current-change="pageChange"/>
   </div>
@@ -112,7 +112,7 @@
       beforeInit() {
         this.url = 'api/processData';
         const sort = 'currentTime,desc';
-        this.params = {page: this.page, size: 10000, sort: sort};
+        this.params = {page: this.page, size: 20000, sort: sort};
         const query = this.query;
         const lineNo= query.lineNo;
         const cabNo = query.cabNo;
