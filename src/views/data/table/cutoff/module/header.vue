@@ -213,7 +213,26 @@
         return jsonData.map(v => filterVal.map(j => {
           if(j==='currentTime'){
             return parseTime(new Date(v[j]*1000))
-          }else{
+          }else if (j === 'stepType') {
+            switch (v[j]) {
+              case 1:
+                return "静置"
+              case 2:
+                return "恒流充电"
+              case 3:
+                return "恒压充电"
+              case 4:
+                return "恒流恒压充电"
+              case 5:
+                return "恒流放电"
+              case 6:
+                return "恒压放电"
+              case 11:
+                return "恒流恒压放电"
+              default:
+                break;
+            }
+          } else{
             return v[j]
           }
           // return v[j]
